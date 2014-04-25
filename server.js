@@ -5,32 +5,32 @@ app.use(express.bodyParser());
 var ARTICLES = [
   {
     id: 1,
-    title: 'How to write a JavaScript Framework',
-    author: 'Tomhuda Katzdale',
+    title: 'Desierto Verde',
+    author: 'Arturo Jaureche',
     body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
   },
   {
     id: 2,
-    title: 'Chronicles of an Embereño',
-    author: 'Alerik Bryneer',
+    title: 'El crimen de la guerra (1870)',
+    author: 'Juan Bautista Alberdi',
     body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
   },
   {
     id: 3,
-    title: 'The Eyes of Thomas',
-    author: 'Yehuda Katz',
+    title: 'Facundo o Civilización y Barbarie',
+    author: 'Domingo Faustino Sarmiento',
     body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
   }
 ];
 
 var PHOTOS = [
-  { id: 1, src: "/images/potd.png" },
-  { id: 2, src: "/images/yohuda.jpg" },
-  { id: 3, src: "/images/easter.jpg" }
+  { id: 1, src: "http://imagenface.com/imagens/imagenes-de-paisajes-1.jpg" },
+  { id: 2, src: "http://imagenface.com/imagens/imagenes-de-paisajes-8.jpg" },
+  { id: 3, src: "http://imagenface.com/imagens/imagenes-de-paisajes-18.jpg" }
 ];
 
 // No-brainer auth: server will authenticate with
-// username "ember" and password "casts", respond
+// username "dev" and password "moravia", respond
 // with a token, and forget the token when restarted.
 
 var currentToken;
@@ -40,7 +40,7 @@ app.post('/auth.json', function(req, res) {
       username = body.username,
       password = body.password;
 
-  if (username == 'ember' && password == 'casts') {
+  if (username == 'dev' && password == 'moravia') {
     // Generate and save the token (forgotten upon server restart).
     currentToken = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     res.send({

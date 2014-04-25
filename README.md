@@ -16,7 +16,7 @@ your browser.
 
 `server.js` in the root directory is the Node server that features
 very simple token-based authentication. 
-=======
-express_test
-============
 
+## Task
+
+Create a front end application (using the tools you like, or think will be a good fit for the project)
