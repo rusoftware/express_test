@@ -1,6 +1,6 @@
 ## Moravia ARG js dev test, Part 2
 
-This is a second test for javascript developer, here you will find a server api
+This is a second test for javascript developer, that contains a node api
 
 ## Install
 
@@ -16,3 +16,7 @@ your browser.
 
 `server.js` in the root directory is the Node server that features
 very simple token-based authentication. 
+=======
+express_test
+============
+
