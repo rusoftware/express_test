@@ -134,13 +134,14 @@ h3{
 
 
 .infobox{
-	background-color: #FFBABA;
+	/*background-color: #FFBABA;*/
 	width: 100%;
 	display: none;
 	text-align: center; 
 	border-bottom: #D8000C 1px solid; 
 	color: #D8000C; 
 	padding: 4px; 
+	margin-top: 8px;
 }
 
 .logued-in{

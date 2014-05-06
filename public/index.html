@@ -33,11 +33,10 @@
                dataType: 'json',
                success: function (data) {
                   if(data.success===true){
-                    $('#resultadoLogin').html('');
                     login(data.token);
                   }else{
                     $('.infobox').html('Wrong username or password, try again.');
-                    logout();
+                    fail();
                   }
               },
               error: function (xhr, status, error) {
@@ -88,7 +87,12 @@
         function login(data){
           read_data(data);
           $("form#login").css("display","none");
+          $(".infobox").css("display","none");
           $(".logued-in").css("display","block");
+        }
+        function fail(){
+          localStorage.removeItem('myToken');
+          $(".infobox").css("display","block");
         }
         function logout(){
           localStorage.removeItem('myToken');
