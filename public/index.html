@@ -67,6 +67,8 @@
 
               );
             }
+          }).error(function() {
+            logout();
           });
 
           // read the pictures
@@ -80,6 +82,8 @@
                 height: "auto"
               });
             }
+          }).error(function() {
+            logout();
           });
         }
 
