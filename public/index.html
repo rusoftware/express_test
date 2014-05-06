@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./css/moravia.css">
+
+  <title>Moravia - Node.js test</title>
+
+  <script src="./js/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript">
+    var server = "http://localhost:3000/";
+
+    $(document).ready(function(){
+        
+        $("#login").submit(function(e){
+            e.preventDefault();
+            
+            var user = $("#user").val();
+            var pass = $("#pass").val();
+            var sendInfo = { "username": user, "password": pass };
+            localStorage.removeItem('myToken');
+
+            $.ajax({ 
+               url: server+'auth.json',
+               type: 'POST',
+               cache: false, 
+               data: sendInfo, 
+               crossDomain: true,
+               dataType: 'json',
+               success: function (data) {
+                  if(data.success===true){
+                    $('#resultadoLogin').html('');
+                    login(data.token);
+                  }else{
+                    $('.infobox').html('Wrong username or password, try again.');
+                    logout();
+                  }
+              },
+              error: function (xhr, status, error) {
+                  $('.infobox').html('Error connecting to the server.');
+                  logout();
+              }
+            });
+        });
+
+        function read_data(token){
+          $("#articles").css("display","block");
+
+          localStorage.setItem('myToken', JSON.stringify(token));
+          $("#logout").css("display","block");
+
+          // read the articles
+          $.getJSON(server+'articles.json?token=' + token, function(data) {
+            for (var i = 0; i < data.length; i++) {
+              $('<article>').appendTo('#articles').html(
+                
+                  '<div class="photos pic-'+data[i].id+'"></div>'+
+                  '<div class="art-content">'+
+                    '<h2>'+data[i].title+'</h2>'+
+                    '<p>'+data[i].body+'</p>'+
+                    '<p class="author">Autor: '+data[i].author+'</p>'+
+                  '</div>'+
+                  '<div class="ClearFix">&nbsp;</div>'
+
+              );
+            }
+          });
+
+          // read the pictures
+          $.getJSON(server+'photos.json?token=' + token, function(data_p) {
+
+            for (var i = 0; i < data_p.length; i++) {
+              $('<img>').appendTo(".pic-"+data_p[i].id).attr({
+                src: data_p[i].src,
+                alt: "",
+                width: "200",
+                height: "auto"
+              });
+            }
+          });
+        }
+
+        // Leemos historial de localStorage
+        function login(data){
+          read_data(data);
+          $("form#login").css("display","none");
+          $(".logued-in").css("display","block");
+        }
+        function logout(){
+          localStorage.removeItem('myToken');
+          $(".logued-in").css("display","none");
+          window.location = "http://localhost:3000/";
+        }
+
+        // check if the localStorage token == app token
+        var tkn = JSON.parse(localStorage.getItem('myToken'));
+        if(tkn!=null){
+          login(tkn);
+        }else{
+          console.log(tkn);
+        }
+
+        $("#logout").click(function(e){
+          e.preventDefault();
+          logout();
+        });
+        
+    });  
+    </script>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="content">
+        	
+          <section id="access">
+            <form method="post" id="login">
+                <h3>LOGIN</h3>
+  	          	<label for="user">User: </label>
+  	           	<input type="text" name="user" id="user" class="iTxt" placeholder="username" required>
+  	           	<br>
+  	           	<label for="pass">Password: </label>
+  	           	<input type="password" name="pass" id="pass" class="iTxt" placeholder="password" required>
+                  <br>
+  	           	<input type="submit" value="Login" class="btn">
+  	        </form>
+            
+            <div class="logued-in">
+              <h3>Welcome back!</h3>
+              <span class="you"></span>
+              <br>
+              <a href="" id="logout" class="logout">LOGOUT</a>
+            </div>
+            
+            <div class="infobox">asdf</div>
+          </section>
+
+          <section id="articles">
+            <h1>Articles</h1>
+          </section>
+
+        </div>
+        
+    </div>
+
+</body>
+</html>
