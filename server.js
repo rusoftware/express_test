@@ -82,6 +82,13 @@ app.get('/photos.json', function(req, res) {
 });
 
 
+app.get('/articles', function(req, res) {
+  res.sendfile('./views/articles.html');
+});
+app.get('/photos', function(req, res) {
+  res.sendfile('./views/photos.html');
+});
+
 
 app.use(express.static(__dirname + '/public'));
 

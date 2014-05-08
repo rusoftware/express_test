@@ -11,15 +11,17 @@
   <title>Moravia - Node.js test</title>
 
   <script src="./js/jquery-1.11.1.min.js"></script>
-  <script src="./js/functions.js"></script>
+  <script src="../js/functions.js"></script>
   <script type="text/javascript">
-    
     var server = "http://localhost:3000/";
 
     function read_data(token){
-      // if fail, invalid toker
-      $.getJSON(server+'articles.json?token=' + token, function(data) {
-        console.log('ok');
+      // read the pictures
+      $.getJSON(server+'photos.json?token=' + token, function(data) {
+
+        for (var i = 0; i < data.length; i++) {
+          $("<li>").appendTo("#photos").html('<img src="'+data[i].src+'" alt="" width="360" height="auto" class="photo">');
+        }
       }).error(function() {
         logout();
       });
@@ -32,45 +34,15 @@
         if(tkn!=null){
           login(tkn);
         }else{
-          //logout();
-          console.log(tkn);
+          logout();
         }
-
-        $("#login").submit(function(e){
-            e.preventDefault();
-            
-            var user = $("#user").val();
-            var pass = $("#pass").val();
-            var sendInfo = { "username": user, "password": pass };
-            localStorage.removeItem('myToken');
-
-            $.ajax({ 
-               url: server+'auth.json',
-               type: 'POST',
-               cache: false, 
-               data: sendInfo, 
-               crossDomain: true,
-               dataType: 'json',
-               success: function (data) {
-                  if(data.success===true){
-                    login(data.token);
-                  }else{
-                    $('.infobox').html(data.message);
-                    fail();
-                  }
-              },
-              error: function (xhr, status, error) {
-                  $('.infobox').html('Error connecting to the server.');
-                  fail();
-              }
-            });
-        });
 
         $("#logout").click(function(e){
           e.preventDefault();
           logout();
         });
         
+        $(".infobox").css("display","none");
     });  
     </script>
 
@@ -101,7 +73,7 @@
                   <a href="/articles" class="btn art">ARTICLES</a>
                 </li>
                 <li>
-                  <a href="/photos" class="btn pic">PHOTOS</a>
+                  <a href="/" class="btn home">HOME</a>
                 </li>
                 <li>
                   <a href="" id="logout" class="logout">LOGOUT</a>
@@ -113,8 +85,9 @@
           </section>
 
           <section id="articles">
-            <h1>HOMEPAGE</h1>
-            <p>You are logged in, select an option.</p>
+            <h1>PHOTOS</h1>
+            <ul id="photos">
+            </ul>
           </section>
 
         </div>

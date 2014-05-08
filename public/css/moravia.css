@@ -67,7 +67,8 @@ hr {
 .ClearFix{display: block;overflow: hidden;clear: both; height: 1px; line-height: 0; font-size: 0px}
 
 section#access{
-	width: 400px;
+	width: 100%;
+	text-align: center;
 	display: block;
 	overflow: hidden;
 	clear: both;
@@ -78,8 +79,8 @@ section#access{
 	padding: 18px;
 	background: #fbfbfb;
 	border: solid 1px #e6e6e6;
-	-webkit-border-radius: 6px 6px 6px 6px;
-	border-radius: 6px 6px 6px 6px;
+	/*-webkit-border-radius: 6px 6px 6px 6px;
+	border-radius: 6px 6px 6px 6px;*/
 }
 h1{
 	display: block;
@@ -127,21 +128,45 @@ h3{
 	text-decoration: none;
 	margin: 0 auto;
 }
-.btn:hover, .logout:hover {
-	background: #176da3;
-	text-decoration: none;
-}
+	.btn:hover, .logout:hover {
+		background: #176da3;
+		text-decoration: none;
+	}
+	.btn.home{
+		background: #d9534f;
+	}
+	.btn.home:hover{
+		background: #d2322d;
+	}
+	.btn.art{
+		background: #f0ad4e;
+	}
+	.btn.art:hover{
+		background: #ed9c28;
+	}
 
+	.btn.pic{
+		background: #5cb85c;
+	}
+	.btn.pic:hover{
+		background: #47a447;
+	}
+	
+	
 
 .infobox{
 	/*background-color: #FFBABA;*/
 	width: 100%;
 	display: none;
 	text-align: center; 
-	border-bottom: #D8000C 1px solid; 
+	border-bottom: solid 1px #D8000C; 
 	color: #D8000C; 
 	padding: 4px; 
 	margin-top: 8px;
+}
+.infobox.ok{
+	border-bottom: solid 1px #82cb2f;
+	color: #82cb2f;
 }
 
 .logued-in{
@@ -173,8 +198,8 @@ section#articles > article{
 .art-content{
 	display: block;
 	float: left;
-	width: 460px;
-	margin-left: 20px;
+	width: 100%;
+	/*margin-left: 20px;*/
 	overflow: hidden;
 }
 .author{
@@ -182,4 +207,24 @@ section#articles > article{
 	font-weight: 600;
 	text-align: right;
 	padding-top: 8px;
+}
+
+ul.nav_bar, ul.nav_bar li,
+ul#photos, ul#photos li{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul.nav_bar li{
+	display: inline-block;
+	margin: 1.2em;
+}
+
+ul#photos li{
+	display: block;
+	overflow: hidden;
+	clear: both;
+	margin: 6px 0;
+	text-align: center;
 }

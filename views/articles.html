@@ -11,15 +11,25 @@
   <title>Moravia - Node.js test</title>
 
   <script src="./js/jquery-1.11.1.min.js"></script>
-  <script src="./js/functions.js"></script>
+  <script src="../js/functions.js"></script>
   <script type="text/javascript">
-    
     var server = "http://localhost:3000/";
 
     function read_data(token){
-      // if fail, invalid toker
+      // read the articles
       $.getJSON(server+'articles.json?token=' + token, function(data) {
-        console.log('ok');
+        for (var i = 0; i < data.length; i++) {
+          $('<article>').appendTo('#articles').html(
+
+            '<div class="photos pic-'+data[i].id+'"></div>'+
+            '<div class="art-content">'+
+              '<h2>'+data[i].title+'</h2>'+
+              '<p>'+data[i].body+'</p>'+
+              '<p class="author">Autor: '+data[i].author+'</p>'+
+            '</div>'+
+            '<div class="ClearFix">&nbsp;</div>'
+            );
+        }
       }).error(function() {
         logout();
       });
@@ -32,47 +42,19 @@
         if(tkn!=null){
           login(tkn);
         }else{
-          //logout();
           console.log(tkn);
+          logout();
         }
-
-        $("#login").submit(function(e){
-            e.preventDefault();
-            
-            var user = $("#user").val();
-            var pass = $("#pass").val();
-            var sendInfo = { "username": user, "password": pass };
-            localStorage.removeItem('myToken');
-
-            $.ajax({ 
-               url: server+'auth.json',
-               type: 'POST',
-               cache: false, 
-               data: sendInfo, 
-               crossDomain: true,
-               dataType: 'json',
-               success: function (data) {
-                  if(data.success===true){
-                    login(data.token);
-                  }else{
-                    $('.infobox').html(data.message);
-                    fail();
-                  }
-              },
-              error: function (xhr, status, error) {
-                  $('.infobox').html('Error connecting to the server.');
-                  fail();
-              }
-            });
-        });
 
         $("#logout").click(function(e){
           e.preventDefault();
           logout();
         });
+
+        $(".infobox").css("display","none");
         
     });  
-    </script>
+  </script>
 
 </head>
 <body>
@@ -98,7 +80,7 @@
               <span class="you"></span>
               <ul class="nav_bar">
                 <li>
-                  <a href="/articles" class="btn art">ARTICLES</a>
+                  <a href="/" class="btn home">HOME</a>
                 </li>
                 <li>
                   <a href="/photos" class="btn pic">PHOTOS</a>
@@ -109,12 +91,11 @@
               </ul>
             </div>
             
-            <div class="infobox"></div>
+            <div class="infobox">asdf</div>
           </section>
 
           <section id="articles">
-            <h1>HOMEPAGE</h1>
-            <p>You are logged in, select an option.</p>
+            <h1>Articles</h1>
           </section>
 
         </div>
