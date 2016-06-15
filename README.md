@@ -1,6 +1,6 @@
-## Moravia ARG js dev test, Part 2
+## JavaScript dev test:
 
-This is a second test for javascript developer, that contains a node api
+This is a test for javascript developer, that contains a node api
 
 ## Install
 

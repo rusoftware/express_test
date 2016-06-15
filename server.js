@@ -24,13 +24,13 @@ var ARTICLES = [
 ];
 
 var PHOTOS = [
-  { id: 1, src: "http://imagenface.com/imagens/imagenes-de-paisajes-1.jpg" },
-  { id: 2, src: "http://imagenface.com/imagens/imagenes-de-paisajes-8.jpg" },
-  { id: 3, src: "http://imagenface.com/imagens/imagenes-de-paisajes-18.jpg" }
+  { id: 1, src: "http://images.freeimages.com/images/previews/deb/the-great-sphinx-of-giza-1216128.jpg" },
+  { id: 2, src: "http://images.freeimages.com/images/previews/4e7/simply-the-taj-1206374.jpg" },
+  { id: 3, src: "http://images.freeimages.com/images/previews/42f/petra-1-1214477.jpg" }
 ];
 
 // No-brainer auth: server will authenticate with
-// username "dev" and password "moravia", respond
+// username "dev" and password "federico", respond
 // with a token, and forget the token when restarted.
 
 var currentToken;
@@ -40,7 +40,7 @@ app.post('/auth.json', function(req, res) {
       username = body.username,
       password = body.password;
 
-  if (username == 'dev' && password == 'moravia') {
+  if (username === 'dev' && password === 'federico') {
     // Generate and save the token (forgotten upon server restart).
     currentToken = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     res.send({
